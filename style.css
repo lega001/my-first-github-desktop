@@ -1,0 +1,218 @@
+/* 90s Retro Anime Theme */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=VT323&display=swap');
+
+:root {
+  --bg-color: #120428;
+  --text-main: #e0e0e0;
+  --neon-pink: #ff2a6d;
+  --neon-blue: #05d9e8;
+  --neon-yellow: #f9c80e;
+  --grid-color: rgba(255, 42, 109, 0.2);
+  --crt-scanline: rgba(18, 16, 16, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'VT323', monospace;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* CRT Scanline Effect */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.2));
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 999;
+  animation: scanline 10s linear infinite;
+}
+
+/* Retro Grid Background */
+.retro-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(transparent 0%, rgba(5, 217, 232, 0.1) 2%, transparent 3%),
+    linear-gradient(90deg, transparent 0%, rgba(5, 217, 232, 0.1) 2%, transparent 3%);
+  background-size: 50px 50px;
+  transform: perspective(500px) rotateX(60deg) translateY(100px) scale(2);
+  z-index: -1;
+  animation: gridMove 20s linear infinite;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header & Title */
+header {
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  border: 2px solid var(--neon-blue);
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 0 10px var(--neon-blue),
+    inset 0 0 20px rgba(5, 217, 232, 0.3);
+}
+
+h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 4rem;
+  color: var(--neon-pink);
+  text-shadow:
+    2px 2px 0px #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    4px 4px 0px var(--neon-blue);
+  margin-bottom: 0.5rem;
+  letter-spacing: -2px;
+  animation: textFlicker 3s infinite alternate;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--neon-yellow);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 5px var(--neon-yellow);
+}
+
+/* Content Area */
+.content-box {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--neon-pink);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 5px 5px 0px var(--neon-pink);
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-size: 1.2rem;
+  border: 2px solid var(--neon-blue);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.btn:hover {
+  background: var(--neon-blue);
+  color: #000;
+  box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* Marquee */
+.marquee-container {
+  background: var(--neon-pink);
+  color: #000;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-text {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+  padding-left: 100%;
+  font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes gridMove {
+  0% {
+    transform: perspective(500px) rotateX(60deg) translateY(0) scale(2);
+  }
+
+  100% {
+    transform: perspective(500px) rotateX(60deg) translateY(50px) scale(2);
+  }
+}
+
+@keyframes textFlicker {
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      2px 2px 0px #000,
+      4px 4px 0px var(--neon-blue);
+  }
+
+  20%,
+  24%,
+  55% {
+    opacity: 0.8;
+    text-shadow: none;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 100%;
+  }
+}
